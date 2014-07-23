@@ -1,0 +1,22 @@
+:css
+  input[type=submit] {
+    margin-top: 15px;
+  }
+.span16
+  %header.page-header
+    %h2 Your applications
+  %p= link_to 'New Application', new_oauth_application_path
+  %table.zebra-striped
+    %thead
+      %tr
+        %th Name
+        %th Callback url
+        %th
+        %th
+    %tbody
+      - @applications.each do |application|
+        %tr{:id => "application_#{application.id}"}
+          %td= link_to application.name, [:oauth, application]
+          %td= application.redirect_uri
+          %td= link_to 'Edit', edit_oauth_application_path(application)
+          %td= render 'delete_form', application: application
